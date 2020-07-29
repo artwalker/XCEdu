@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--        只显示偶数行-->
+        <li v-for="(item, index) in list" :key="index" v-if="index % 2 == 0">{{index}}--{{item}}</li>
+        <li v-for="(value, key) in user">{{key}}‐{{value}}</li>
+        <li v-for="(item, index) in userList" :key="index">
+            <div v-if="item.user.username=='java'" style="background: chartreuse"><!‐‐名称为java的加背景色‐‐>
+                {{index}}‐{{item.user.username}}‐{{item.user.age}}
+            </div>
+            <div v-else="">
+                {{index}}‐{{item.user.username}}‐{{item.user.age}}
+            </div>
+        </li>
+    </div>
+</body>
+
+<script>
+    // 实例化Vue对象
+    //vm :叫做MVVM中的 View Model
+    var VM = new Vue({
+        el:"#app", //表示当前vue对象接管app的div区域
+        data:{
+            list:[1,2,3,4],
+            user:{name:'java', age:10},
+            userList:[
+                {user:{username:'java', age:10}},
+                {user:{username:'python', age: 11}}
+            ]
+        }
+    });
+</script>
+</html>
