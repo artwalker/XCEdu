@@ -1,5 +1,6 @@
 package com.xuecheng.framework.domain.cms;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
@@ -56,5 +57,4 @@ public class CmsPage {
     private String htmlFileId;
     //数据Url
     private String dataUrl;
-
 }

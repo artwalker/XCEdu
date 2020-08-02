@@ -1,9 +1,27 @@
 <template>
   <div>
-    <!--    按钮-->
-    <el-row>
+    <!--    查询表单-->
+    <el-from :model="params">
+      <el-select v-model="params.siteId" placeholder="请选择">
+        <el-option
+          v-for="item in siteList"
+          :key="item.siteId"
+          :label="item.siteName"
+          :value="item.siteId">
+        </el-option>
+      </el-select>
+      页面别名：
+      <el-input v-model="params.pageAliase" style="width: 100px"></el-input>
+      <!--    按钮-->
       <el-button type="primary" v-on:click="query" size="small">查询</el-button>
-    </el-row>
+      <!--      新增功能按钮-->
+      <router-link :to="{path:'/cms/page/add',query:{
+        page:this.params.page,
+        siteId:this.params.siteId
+      }}">
+        <el-button type="primary" size="small">新增页面</el-button>
+      </router-link>
+    </el-from>
     <!--    Table表格-->
     <el-table
       :data="list"
@@ -40,6 +58,13 @@
         label="创建时间"
         width="180">
       </el-table-column>
+
+      <el-table-column label="操作" width="80">
+        <template slot-scope="page">
+          <el-button size="small" type="text" @click="edit(page.row.pageId)">编辑</el-button>
+          <el-button size="small" type="text" @click="del(page.row.pageId)">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <!--    分页-->
     <el-pagination
@@ -59,11 +84,14 @@
   export default {
     data() {
       return {
+        siteList: [], //站点列表
         list: [],
         total: 50,
         params: {
+          siteId: '',// 用于填写默认页面列表的siteId
+          pageAliase: '',
           page: 1, // 页码
-          size: 2 //每页显示个数
+          size: 10 //每页显示个数
         }
       }
     },
@@ -80,11 +108,47 @@
           this.total = res.queryResult.total
           this.list = res.queryResult.list
         })
+      },
+      edit(pageId) {
+        this.$router.push({
+          path: '/cms/page/edit/' + pageId, query: {
+            page: this.params.page,
+            siteId: this.params.siteId
+          }
+        })
+      },
+      del:function (pageId) {
+        this.$confirm('您确认删除吗?', '提示', { }).then(() => {
+
+          //调用服务端接口
+          cmsApi.page_del(pageId).then(res=>{
+
+            if(res.success){
+              this.$message.success("删除成功")
+              //刷新页面
+              this.query()
+            }else{
+              this.$message.error("删除失败")
+            }
+          })
+        })
+
       }
     },
     mounted() {
       // 默认查询页面
       this.query()
+      //初始化站点列表
+      this.siteList = [
+        {
+          siteId: '5a751fab6abb5044e0d19ea1',
+          siteName: '门户主站'
+        },
+        {
+          siteId: '102',
+          siteName: '测试站'
+        }
+      ]
     }
   }
 </script>
