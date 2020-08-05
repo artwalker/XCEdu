@@ -16,5 +16,4 @@ public class CmsConfigModel {
     private String url;
     private Map mapValue;
     private String value;
-
 }

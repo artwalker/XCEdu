@@ -47,7 +47,6 @@
       <el-form-item label="创建时间">
         <el-date-picker type="datetime" placeholder="创建时间" v-model="pageForm.pageCreateTime"></el-date-picker>
       </el-form-item>
-
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="go_back">返回</el-button>
