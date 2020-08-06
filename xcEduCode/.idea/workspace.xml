@@ -65,7 +65,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/test-freemarker/src/main/resources/templates" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/test-rabbitmq-consumer/src/main/java/com/xuecheng/test/rabbitmq" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/test-rabbitmq-consumer/src/main/java/com/xuecheng/test/rabbitmq/config" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -76,7 +77,7 @@
     <property name="project.structure.proportion" value="0.15402843" />
     <property name="project.structure.side.proportion" value="0.5583815" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
@@ -88,13 +89,14 @@
       <recent name="com.xuecheng.manage_cms.dao" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/test-freemarker/src/main/resources/templates" />
-      <recent name="$PROJECT_DIR$/xc-service-manage-cms/src/main/java/com/xuecheng/manage_cms/web/controller" />
-      <recent name="$PROJECT_DIR$/xc-service-manage-cms/src/main/java/com/xuecheng/manage_cms" />
-      <recent name="$PROJECT_DIR$/xc-service-manage-cms/src/main/java/com/xuecheng/manage_cms/dao" />
-      <recent name="$PROJECT_DIR$/xc-service-manage-cms/src/test/java/resources/templates" />
+      <recent name="$PROJECT_DIR$/test-rabbitmq-consumer/src/main/java/com/xuecheng/test/rabbitmq/config" />
+      <recent name="$PROJECT_DIR$/test-rabbitmq-producer/src/test/java/com/xuecheng/test/rabbitmq" />
+      <recent name="$PROJECT_DIR$/test-rabbitmq-producer/src/main/java/com/xuecheng/test/rabbitmq" />
+      <recent name="$PROJECT_DIR$/test-rabbitmq-producer/src/main/java/com/xuecheng/test/rabbitmq/config" />
+      <recent name="$PROJECT_DIR$/test-rabbitmq-consumer/src/main/java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.xuecheng.test.rabbitmq" />
       <recent name="com.xuecheng.manage_cms.config" />
       <recent name="com.xuecheng.manage_cms.dao" />
     </key>
@@ -103,105 +105,62 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="SpringBootApplicationConfigurationType" />
-      </set>
-    </option>
-  </component>
-  <component name="RunManager" selected="JUnit.GridFsTest.queryFile (1)">
-    <configuration name="GridFsTest.queryFile (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="xc-service-manage-cms" />
+  <component name="RunManager" selected="JUnit.Producer05_topics_springboot.testSendPostPage">
+    <configuration name="Producer04_topics" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xuecheng.test.rabbitmq.Producer04_topics" />
+      <module name="test-rabbitmq-producer" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.xuecheng.manage_cms.*" />
+          <option name="PATTERN" value="com.xuecheng.test.rabbitmq.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.xuecheng.manage_cms" />
-      <option name="MAIN_CLASS_NAME" value="com.xuecheng.manage_cms.GridFsTest" />
-      <option name="METHOD_NAME" value="queryFile" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Producer05_topics_springboot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test-rabbitmq-producer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xuecheng.test.rabbitmq.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.xuecheng.test.rabbitmq" />
+      <option name="MAIN_CLASS_NAME" value="com.xuecheng.test.rabbitmq.Producer05_topics_springboot" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Producer05_topics_springboot.testSendEmail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test-rabbitmq-producer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xuecheng.test.rabbitmq.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.xuecheng.test.rabbitmq" />
+      <option name="MAIN_CLASS_NAME" value="com.xuecheng.test.rabbitmq.Producer05_topics_springboot" />
+      <option name="METHOD_NAME" value="testSendEmail" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GridFsTest.queryFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test-freemarker" />
+    <configuration name="Producer05_topics_springboot.testSendPostPage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test-rabbitmq-producer" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.xuecheng.test.freemarker.*" />
+          <option name="PATTERN" value="com.xuecheng.test.rabbitmq.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.xuecheng.test.freemarker" />
-      <option name="MAIN_CLASS_NAME" value="com.xuecheng.test.freemarker.GridFsTest" />
-      <option name="METHOD_NAME" value="queryFile" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GridFsTest.queryFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="xc-service-manage-cms" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.xuecheng.manage_cms.config.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.xuecheng.manage_cms" />
-      <option name="MAIN_CLASS_NAME" value="com.xuecheng.manage_cms.GridFsTest" />
-      <option name="METHOD_NAME" value="queryFile" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GridFsTest.testDelFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="xc-service-manage-cms" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.xuecheng.manage_cms.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.xuecheng.manage_cms" />
-      <option name="MAIN_CLASS_NAME" value="com.xuecheng.manage_cms.GridFsTest" />
-      <option name="METHOD_NAME" value="testDelFile" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GridFsTest.testStore (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="xc-service-manage-cms" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.xuecheng.manage_cms.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.xuecheng.manage_cms" />
-      <option name="MAIN_CLASS_NAME" value="com.xuecheng.manage_cms.GridFsTest" />
-      <option name="METHOD_NAME" value="testStore" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GridFsTest.testStore" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test-freemarker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.xuecheng.test.freemarker.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.xuecheng.test.freemarker" />
-      <option name="MAIN_CLASS_NAME" value="com.xuecheng.test.freemarker.GridFsTest" />
-      <option name="METHOD_NAME" value="testStore" />
+      <option name="PACKAGE_NAME" value="com.xuecheng.test.rabbitmq" />
+      <option name="MAIN_CLASS_NAME" value="com.xuecheng.test.rabbitmq.Producer05_topics_springboot" />
+      <option name="METHOD_NAME" value="testSendPostPage" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -223,22 +182,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestRabbitmqApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="test-rabbitmq-consumer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xuecheng.test.rabbitmq.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xuecheng.test.rabbitmq.TestRabbitmqApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRabbitmqApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="test-rabbitmq-producer" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xuecheng.test.rabbitmq.TestRabbitmqApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="JUnit.GridFsTest.testStore" />
-      <item itemvalue="JUnit.GridFsTest.queryFile" />
-      <item itemvalue="JUnit.GridFsTest.testDelFile" />
+      <item itemvalue="Application.Producer04_topics" />
       <item itemvalue="Spring Boot.ManageCmsApplication" />
       <item itemvalue="Spring Boot.FreemarkerTestApplication" />
-      <item itemvalue="JUnit.GridFsTest.testStore (1)" />
-      <item itemvalue="JUnit.GridFsTest.queryFile (1)" />
+      <item itemvalue="Spring Boot.TestRabbitmqApplication" />
+      <item itemvalue="Spring Boot.TestRabbitmqApplication (1)" />
+      <item itemvalue="JUnit.Producer05_topics_springboot.testSendEmail" />
+      <item itemvalue="JUnit.Producer05_topics_springboot" />
+      <item itemvalue="JUnit.Producer05_topics_springboot.testSendPostPage" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GridFsTest.queryFile (1)" />
-        <item itemvalue="JUnit.GridFsTest.testStore (1)" />
-        <item itemvalue="JUnit.GridFsTest.testDelFile" />
-        <item itemvalue="JUnit.GridFsTest.queryFile" />
-        <item itemvalue="JUnit.GridFsTest.testStore" />
+        <item itemvalue="JUnit.Producer05_topics_springboot.testSendPostPage" />
+        <item itemvalue="JUnit.Producer05_topics_springboot.testSendEmail" />
+        <item itemvalue="Spring Boot.TestRabbitmqApplication (1)" />
+        <item itemvalue="JUnit.Producer05_topics_springboot" />
+        <item itemvalue="Application.Producer04_topics" />
       </list>
     </recent_temporary>
   </component>
@@ -246,19 +226,9 @@
     <option name="viewStates">
       <list>
         <serviceView>
-          <option name="contentProportion" value="0.18726017" />
+          <option name="contentProportion" value="0.3146585" />
           <treeState>
-            <expand>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Not Started" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </treeState>
         </serviceView>
@@ -291,6 +261,8 @@
       <workItem from="1596545020628" duration="1967000" />
       <workItem from="1596549059069" duration="305000" />
       <workItem from="1596588491100" duration="3071000" />
+      <workItem from="1596693608672" duration="9316000" />
+      <workItem from="1596705208488" duration="3000000" />
     </task>
     <servers />
   </component>
@@ -346,10 +318,11 @@
       <screen x="0" y="23" width="1440" height="815" />
     </state>
     <state x="131" y="123" width="1174" height="612" key="DiffContextDialog/1440.23.1024.745/0.23.1440.815@0.23.1440.815" timestamp="1596334708554" />
-    <state width="1058" height="209" key="GridCell.Tab.0.bottom" timestamp="1596593957841">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state width="1332" height="413" key="GridCell.Tab.0.bottom" timestamp="1596708225345">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1332" height="370" key="GridCell.Tab.0.bottom/0.23.1440.811@0.23.1440.811" timestamp="1596539883317" />
+    <state width="1332" height="413" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1596708225345" />
+    <state width="1332" height="323" key="GridCell.Tab.0.bottom/0.23.1440.811@0.23.1440.811" timestamp="1596708089842" />
     <state width="1332" height="259" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1596543805516" />
     <state width="1332" height="406" key="GridCell.Tab.0.bottom/0.23.1440.813@0.23.1440.813" timestamp="1596588955205" />
     <state width="1058" height="422" key="GridCell.Tab.0.bottom/0.23.1440.815@0.23.1440.815" timestamp="1596588986039" />
@@ -365,10 +338,11 @@
     <state width="1332" height="311" key="GridCell.Tab.0.bottom/1440.23.1024.745/0.23.1440.824@0.23.1440.824" timestamp="1596184415897" />
     <state width="1332" height="168" key="GridCell.Tab.0.bottom/1440.23.1024.745/0.23.1440.825@0.23.1440.825" timestamp="1596184218270" />
     <state width="1332" height="109" key="GridCell.Tab.0.bottom/1440.23.1024.745/0.23.1440.827@0.23.1440.827" timestamp="1596184881559" />
-    <state width="1058" height="209" key="GridCell.Tab.0.center" timestamp="1596593957840">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state width="1332" height="413" key="GridCell.Tab.0.center" timestamp="1596708225344">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1332" height="370" key="GridCell.Tab.0.center/0.23.1440.811@0.23.1440.811" timestamp="1596539883316" />
+    <state width="1332" height="413" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1596708225344" />
+    <state width="1332" height="323" key="GridCell.Tab.0.center/0.23.1440.811@0.23.1440.811" timestamp="1596708089841" />
     <state width="1332" height="259" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1596543805514" />
     <state width="1332" height="406" key="GridCell.Tab.0.center/0.23.1440.813@0.23.1440.813" timestamp="1596588955203" />
     <state width="1058" height="422" key="GridCell.Tab.0.center/0.23.1440.815@0.23.1440.815" timestamp="1596588986037" />
@@ -384,10 +358,11 @@
     <state width="1332" height="311" key="GridCell.Tab.0.center/1440.23.1024.745/0.23.1440.824@0.23.1440.824" timestamp="1596184415889" />
     <state width="1332" height="168" key="GridCell.Tab.0.center/1440.23.1024.745/0.23.1440.825@0.23.1440.825" timestamp="1596184218263" />
     <state width="1332" height="109" key="GridCell.Tab.0.center/1440.23.1024.745/0.23.1440.827@0.23.1440.827" timestamp="1596184881558" />
-    <state width="1058" height="209" key="GridCell.Tab.0.left" timestamp="1596593957839">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state width="1332" height="413" key="GridCell.Tab.0.left" timestamp="1596708225343">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1332" height="370" key="GridCell.Tab.0.left/0.23.1440.811@0.23.1440.811" timestamp="1596539883315" />
+    <state width="1332" height="413" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1596708225343" />
+    <state width="1332" height="323" key="GridCell.Tab.0.left/0.23.1440.811@0.23.1440.811" timestamp="1596708089840" />
     <state width="1332" height="259" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1596543805513" />
     <state width="1332" height="406" key="GridCell.Tab.0.left/0.23.1440.813@0.23.1440.813" timestamp="1596588955203" />
     <state width="1058" height="422" key="GridCell.Tab.0.left/0.23.1440.815@0.23.1440.815" timestamp="1596588986036" />
@@ -403,10 +378,11 @@
     <state width="1332" height="311" key="GridCell.Tab.0.left/1440.23.1024.745/0.23.1440.824@0.23.1440.824" timestamp="1596184415888" />
     <state width="1332" height="168" key="GridCell.Tab.0.left/1440.23.1024.745/0.23.1440.825@0.23.1440.825" timestamp="1596184218261" />
     <state width="1332" height="109" key="GridCell.Tab.0.left/1440.23.1024.745/0.23.1440.827@0.23.1440.827" timestamp="1596184881557" />
-    <state width="1058" height="209" key="GridCell.Tab.0.right" timestamp="1596593957840">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state width="1332" height="413" key="GridCell.Tab.0.right" timestamp="1596708225344">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1332" height="370" key="GridCell.Tab.0.right/0.23.1440.811@0.23.1440.811" timestamp="1596539883316" />
+    <state width="1332" height="413" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1596708225344" />
+    <state width="1332" height="323" key="GridCell.Tab.0.right/0.23.1440.811@0.23.1440.811" timestamp="1596708089841" />
     <state width="1332" height="259" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1596543805515" />
     <state width="1332" height="406" key="GridCell.Tab.0.right/0.23.1440.813@0.23.1440.813" timestamp="1596588955204" />
     <state width="1058" height="422" key="GridCell.Tab.0.right/0.23.1440.815@0.23.1440.815" timestamp="1596588986038" />
@@ -422,10 +398,11 @@
     <state width="1332" height="311" key="GridCell.Tab.0.right/1440.23.1024.745/0.23.1440.824@0.23.1440.824" timestamp="1596184415890" />
     <state width="1332" height="168" key="GridCell.Tab.0.right/1440.23.1024.745/0.23.1440.825@0.23.1440.825" timestamp="1596184218267" />
     <state width="1332" height="109" key="GridCell.Tab.0.right/1440.23.1024.745/0.23.1440.827@0.23.1440.827" timestamp="1596184881558" />
-    <state width="1058" height="209" key="GridCell.Tab.1.bottom" timestamp="1596593957844">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state width="1332" height="323" key="GridCell.Tab.1.bottom" timestamp="1596708225328">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1332" height="370" key="GridCell.Tab.1.bottom/0.23.1440.811@0.23.1440.811" timestamp="1596539883319" />
+    <state width="1332" height="323" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1596708225328" />
+    <state width="1332" height="323" key="GridCell.Tab.1.bottom/0.23.1440.811@0.23.1440.811" timestamp="1596708089843" />
     <state width="1332" height="259" key="GridCell.Tab.1.bottom/0.23.1440.812@0.23.1440.812" timestamp="1596543805520" />
     <state width="1058" height="423" key="GridCell.Tab.1.bottom/0.23.1440.813@0.23.1440.813" timestamp="1596549368192" />
     <state width="1058" height="422" key="GridCell.Tab.1.bottom/0.23.1440.815@0.23.1440.815" timestamp="1596588986042" />
@@ -441,10 +418,11 @@
     <state width="1332" height="311" key="GridCell.Tab.1.bottom/1440.23.1024.745/0.23.1440.824@0.23.1440.824" timestamp="1596184415902" />
     <state width="1332" height="168" key="GridCell.Tab.1.bottom/1440.23.1024.745/0.23.1440.825@0.23.1440.825" timestamp="1596184218277" />
     <state width="1332" height="109" key="GridCell.Tab.1.bottom/1440.23.1024.745/0.23.1440.827@0.23.1440.827" timestamp="1596184881561" />
-    <state width="1058" height="209" key="GridCell.Tab.1.center" timestamp="1596593957843">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state width="1332" height="323" key="GridCell.Tab.1.center" timestamp="1596708225326">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1332" height="370" key="GridCell.Tab.1.center/0.23.1440.811@0.23.1440.811" timestamp="1596539883318" />
+    <state width="1332" height="323" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1596708225326" />
+    <state width="1332" height="323" key="GridCell.Tab.1.center/0.23.1440.811@0.23.1440.811" timestamp="1596708089842" />
     <state width="1332" height="259" key="GridCell.Tab.1.center/0.23.1440.812@0.23.1440.812" timestamp="1596543805518" />
     <state width="1058" height="423" key="GridCell.Tab.1.center/0.23.1440.813@0.23.1440.813" timestamp="1596549368191" />
     <state width="1058" height="422" key="GridCell.Tab.1.center/0.23.1440.815@0.23.1440.815" timestamp="1596588986041" />
@@ -460,10 +438,11 @@
     <state width="1332" height="311" key="GridCell.Tab.1.center/1440.23.1024.745/0.23.1440.824@0.23.1440.824" timestamp="1596184415898" />
     <state width="1332" height="168" key="GridCell.Tab.1.center/1440.23.1024.745/0.23.1440.825@0.23.1440.825" timestamp="1596184218274" />
     <state width="1332" height="109" key="GridCell.Tab.1.center/1440.23.1024.745/0.23.1440.827@0.23.1440.827" timestamp="1596184881560" />
-    <state width="1058" height="209" key="GridCell.Tab.1.left" timestamp="1596593957842">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state width="1332" height="323" key="GridCell.Tab.1.left" timestamp="1596708225325">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1332" height="370" key="GridCell.Tab.1.left/0.23.1440.811@0.23.1440.811" timestamp="1596539883317" />
+    <state width="1332" height="323" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1596708225325" />
+    <state width="1332" height="323" key="GridCell.Tab.1.left/0.23.1440.811@0.23.1440.811" timestamp="1596708089842" />
     <state width="1332" height="259" key="GridCell.Tab.1.left/0.23.1440.812@0.23.1440.812" timestamp="1596543805517" />
     <state width="1058" height="423" key="GridCell.Tab.1.left/0.23.1440.813@0.23.1440.813" timestamp="1596549368171" />
     <state width="1058" height="422" key="GridCell.Tab.1.left/0.23.1440.815@0.23.1440.815" timestamp="1596588986040" />
@@ -479,10 +458,11 @@
     <state width="1332" height="311" key="GridCell.Tab.1.left/1440.23.1024.745/0.23.1440.824@0.23.1440.824" timestamp="1596184415898" />
     <state width="1332" height="168" key="GridCell.Tab.1.left/1440.23.1024.745/0.23.1440.825@0.23.1440.825" timestamp="1596184218274" />
     <state width="1332" height="109" key="GridCell.Tab.1.left/1440.23.1024.745/0.23.1440.827@0.23.1440.827" timestamp="1596184881560" />
-    <state width="1058" height="209" key="GridCell.Tab.1.right" timestamp="1596593957843">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state width="1332" height="323" key="GridCell.Tab.1.right" timestamp="1596708225327">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1332" height="370" key="GridCell.Tab.1.right/0.23.1440.811@0.23.1440.811" timestamp="1596539883318" />
+    <state width="1332" height="323" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1596708225327" />
+    <state width="1332" height="323" key="GridCell.Tab.1.right/0.23.1440.811@0.23.1440.811" timestamp="1596708089843" />
     <state width="1332" height="259" key="GridCell.Tab.1.right/0.23.1440.812@0.23.1440.812" timestamp="1596543805519" />
     <state width="1058" height="423" key="GridCell.Tab.1.right/0.23.1440.813@0.23.1440.813" timestamp="1596549368191" />
     <state width="1058" height="422" key="GridCell.Tab.1.right/0.23.1440.815@0.23.1440.815" timestamp="1596588986041" />
@@ -503,19 +483,27 @@
     </state>
     <state x="370" y="137" key="NewModule_or_Project.wizard/0.23.1440.811@0.23.1440.811" timestamp="1596454716242" />
     <state x="370" y="139" key="NewModule_or_Project.wizard/1440.23.1024.745/0.23.1440.824@0.23.1440.824" timestamp="1595498432950" />
-    <state x="208" y="23" width="1024" height="824" key="SettingsEditor" timestamp="1596458985745">
+    <state x="208" y="23" width="1024" height="824" key="SettingsEditor" timestamp="1596694499839">
       <screen x="0" y="23" width="1440" height="811" />
     </state>
-    <state x="208" y="23" key="SettingsEditor/0.23.1440.811@0.23.1440.811" timestamp="1596458985745" />
+    <state x="208" y="23" key="SettingsEditor/0.23.1440.811@0.23.1440.811" timestamp="1596694499839" />
     <state x="208" y="23" width="1024" height="824" key="SettingsEditor/1440.23.1024.745/0.23.1440.824@0.23.1440.824" timestamp="1595506290356" />
+    <state x="518" y="215" key="chooseDestDirectoryDialog" timestamp="1596706069981">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state x="518" y="215" key="chooseDestDirectoryDialog/0.23.1440.811@0.23.1440.811" timestamp="1596706069981" />
     <state x="285" y="173" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1596543701576">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
     <state x="285" y="173" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.1440.812@0.23.1440.812" timestamp="1596543701576" />
-    <state x="150" y="133" key="new project wizard" timestamp="1596454569655">
+    <state x="114" y="173" width="790" height="538" key="find.popup" timestamp="1596698066251">
       <screen x="0" y="23" width="1440" height="811" />
     </state>
-    <state x="150" y="133" key="new project wizard/0.23.1440.811@0.23.1440.811" timestamp="1596454569655" />
+    <state x="114" y="173" width="790" height="538" key="find.popup/0.23.1440.811@0.23.1440.811" timestamp="1596698066251" />
+    <state x="150" y="133" key="new project wizard" timestamp="1596693758332">
+      <screen x="0" y="23" width="1440" height="811" />
+    </state>
+    <state x="150" y="133" key="new project wizard/0.23.1440.811@0.23.1440.811" timestamp="1596693758332" />
     <state x="150" y="135" key="new project wizard/1440.23.1024.745/0.23.1440.824@0.23.1440.824" timestamp="1595506264478" />
     <state x="381" y="158" width="670" height="676" key="search.everywhere.popup" timestamp="1596453918819">
       <screen x="0" y="23" width="1440" height="811" />
@@ -524,5 +512,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/xcEduCode$ManageCmsApplication.ic" NAME="ManageCmsApplication Coverage Results" MODIFIED="1596543665178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/xcEduCode$Producer03_topics.ic" NAME="Producer03_topics Coverage Results" MODIFIED="1596702693034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.xuecheng.test.rabbitmq.*</FILTER>
+    </SUITE>
   </component>
 </project>
