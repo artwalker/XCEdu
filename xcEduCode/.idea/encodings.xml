@@ -13,6 +13,9 @@
     <file url="file://$PROJECT_DIR$/xc-framework-utils/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xc-service-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xc-service-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xc-service-manage-cms-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xc-service-manage-cms-client/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xc-service-manage-cms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xc-service-manage-course/src/main/java" charset="UTF-8" />
   </component>
 </project>
