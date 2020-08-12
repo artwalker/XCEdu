@@ -32,5 +32,4 @@ public class CourseMarket implements Serializable {
     private Date startTime;
     @Column(name = "end_time")
     private Date endTime;
-
 }

@@ -111,7 +111,8 @@
           console.log(this.categoryList)
 
       })
-
+      //取课程分类
+      courseApi.category_findlist({}).then((res) => { this.categoryList = res.children; });
       //查询数据字典
       //查询课程等级
       systemApi.sys_getDictionary("200").then(res=>{
