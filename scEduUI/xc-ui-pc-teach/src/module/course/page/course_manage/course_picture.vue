@@ -9,7 +9,8 @@
       :limit="picmax"
       :on-exceed="rejectupload"
       :before-remove="handleRemove"
-      :data="uploadval">
+      :data="uploadval"
+      name="multipartFile">
       <i class="el-icon-plus"></i>
     </el-upload>
   </div>
@@ -27,7 +28,7 @@
         dialogImageUrl: '',
         dialogVisible: false,
         fileList:[],
-        uploadval:{filetag:"course"},//上传提交的额外的数据 ，将uploadval转成key/value提交给服务器
+        uploadval:{filetag:"course",businesskey:"testbusinesskey"},//上传提交的额外的数据 ，将uploadval转成key/value提交给服务器
         imgUrl:sysConfig.imgUrl
       }
     },
@@ -43,12 +44,26 @@
       //删除图片
       handleRemove(file, fileList) {
         console.log(file)
-        //调用服务端去删除课程图片信息，如果返回false，前端停止删除
-        //异步调用
-        return new Promise((resolve,rejct)=>{
+        return new Promise((resolve,reject)=>{
           courseApi.deleteCoursePic(this.courseid).then(res=>{
             if(res.success){
+              //成功
+              this.$message.success("删除成功");
+              resolve();
+            }else{
+              this.$message.error("删除失败");
+              //失败
+             reject();
+            }
 
+          })
+        })
+
+        //调用服务端去删除课程图片信息，如果返回false，前端停止删除
+        //异步调用
+/*        return new Promise((resolve,rejct)=>{
+          courseApi.deleteCoursePic(this.courseid).then(res=>{
+            if(res.success){
                 //成功
               resolve()
             }else{
@@ -58,7 +73,7 @@
             }
 
           })
-        })
+        })*/
 
       },
       //上传成功的钩子方法
@@ -71,7 +86,7 @@
           let fileId = response.fileSystem.fileId;
           courseApi.addCoursePic(this.courseid,fileId).then(res=>{
               if(res.success){
-                  this.$message.success("上传图片")
+                  this.$message.success("上传图片成功")
               }else{
                 this.$message.error(res.message)
               }
@@ -91,7 +106,6 @@
       //执行成功 resolve
       //执行失败 reject
       testPromise(i){
-
           return new Promise((resolve,reject)=>{
               if(i<2){
                   //成功了
@@ -100,7 +114,6 @@
                   //失败了
                 reject('失败了');
               }
-
           })
       }
     },
@@ -115,7 +128,15 @@
             this.fileList.push({name:'pic',url:imgUrl,fileId:res.pic})
           }
 
+      }).catch(res=>{
+
       })
+
+/*      this.testPromise(3).then(res=>{
+        alert(res)
+      }).catch(res=>{
+        alert(res)
+      })*/
       //测试调用promise方法，then中写的成功后的回调方法，
 //      this.testPromise(3).then(res=>{
 //          alert(res)
