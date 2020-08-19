@@ -35,6 +35,15 @@ public class GridFsTest {
     @Autowired
     GridFSBucket gridFSBucket;
 
+    // 文件存储2
+    @Test
+    public void testStore2() throws FileNotFoundException {
+        File file = new File("/Users/XinxingWang/Development/Java/IDEA_Project/xcEduCode/test-freemarker/src/main/resources/templates/course.ftl");
+        FileInputStream inputStream = new FileInputStream(file); //保存模版文件内容
+        ObjectId gridFSFile = gridFsTemplate.store(inputStream, "course.ftl");
+        System.out.println(gridFSFile);
+    }
+
     //存文件
     @Test
     public void testStore() throws FileNotFoundException {

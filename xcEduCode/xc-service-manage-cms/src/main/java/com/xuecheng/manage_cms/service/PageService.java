@@ -63,10 +63,11 @@ public class PageService {
 
     /**
      * 页面列表分页查询
-     * @param page  当前页码
-     * @param size  页面显示个数
-     * @param queryPageRequest  查询条件
-     * @return  页面列表
+     *
+     * @param page             当前页码
+     * @param size             页面显示个数
+     * @param queryPageRequest 查询条件
+     * @return 页面列表
      */
     public QueryResponseResult findList(int page, int size, QueryPageRequest queryPageRequest) {
         if (queryPageRequest == null) {
@@ -78,11 +79,11 @@ public class PageService {
         //条件值
         CmsPage cmsPage = new CmsPage();
         //站点id
-        if(StringUtils.isNotEmpty(queryPageRequest.getSiteId())){
+        if (StringUtils.isNotEmpty(queryPageRequest.getSiteId())) {
             cmsPage.setSiteId(queryPageRequest.getSiteId());
         }
         //页面别名
-        if(StringUtils.isNotEmpty(queryPageRequest.getPageAliase())) {
+        if (StringUtils.isNotEmpty(queryPageRequest.getPageAliase())) {
             cmsPage.setPageAliase(queryPageRequest.getPageAliase());
         }
         //创建条件实例
@@ -99,7 +100,7 @@ public class PageService {
         Pageable pageable = PageRequest.of(page, size);
 
         //分页查询
-        Page<CmsPage> all = cmsPageRepository.findAll(example,pageable);
+        Page<CmsPage> all = cmsPageRepository.findAll(example, pageable);
         QueryResult<CmsPage> cmsPageQueryResult = new QueryResult<CmsPage>();
         cmsPageQueryResult.setList(all.getContent());
         cmsPageQueryResult.setTotal(all.getTotalElements());
@@ -111,14 +112,14 @@ public class PageService {
      */
     public CmsPageResult add(CmsPage cmsPage) {
         //校验cmsPage是否为空
-        if(cmsPage == null){
+        if (cmsPage == null) {
             //抛出异常，非法请求
             //......
         }
         //校验页面是否存在，根据页面名称、站点Id、页面webpath查询
         CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
         //校验页面是否存在，已存在则抛出异常
-        if(cmsPage1 != null) {
+        if (cmsPage1 != null) {
             //抛出异常，非法请求
             //......
             ExceptionCast.cast(CmsCode.CMS_ADDPAGE_EXISTSNAME);
@@ -126,7 +127,7 @@ public class PageService {
         cmsPage.setPageId(null);//添加页面主键由spring data 自动生成
         cmsPageRepository.save(cmsPage);
         //返回结果
-        return  new CmsPageResult(CommonCode.SUCCESS, cmsPage);
+        return new CmsPageResult(CommonCode.SUCCESS, cmsPage);
     }
 
     /**
@@ -176,12 +177,13 @@ public class PageService {
 
     /**
      * 删除页面
+     *
      * @param id
      * @return
      */
     public ResponseResult delete(String id) {
         CmsPage one = this.getById(id);
-        if(one != null) {
+        if (one != null) {
             //删除页面
             cmsPageRepository.deleteById(id);
             return new ResponseResult(CommonCode.SUCCESS);
@@ -190,27 +192,28 @@ public class PageService {
     }
 
     //页面静态化方法
+
     /**
      * 静态化程序获取页面的DataUrl
-     *
+     * <p>
      * 静态化程序远程请求DataUrl获取数据模型。
-     *
+     * <p>
      * 静态化程序获取页面的模板信息
-     *
+     * <p>
      * 执行页面静态化
      */
-    public String getPageHtml(String pageId){
+    public String getPageHtml(String pageId) {
 
         //获取数据模型
         Map model = getModelByPageId(pageId);
-        if(model == null){
+        if (model == null) {
             //数据模型获取不到
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_DATAISNULL);
         }
 
         //获取页面的模板信息
         String template = getTemplateByPageId(pageId);
-        if(StringUtils.isEmpty(template)){
+        if (StringUtils.isEmpty(template)) {
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);
         }
 
@@ -219,13 +222,14 @@ public class PageService {
         return html;
 
     }
+
     //执行静态化
-    private String generateHtml(String templateContent, Map model ){
+    private String generateHtml(String templateContent, Map model) {
         //创建配置对象
         Configuration configuration = new Configuration(Configuration.getVersion());
         //创建模板加载器
         StringTemplateLoader stringTemplateLoader = new StringTemplateLoader();
-        stringTemplateLoader.putTemplate("template",templateContent);
+        stringTemplateLoader.putTemplate("template", templateContent);
         //向configuration配置模板加载器
         configuration.setTemplateLoader(stringTemplateLoader);
         //获取模板
@@ -242,21 +246,21 @@ public class PageService {
     }
 
     //获取页面的模板信息
-    private String getTemplateByPageId(String pageId){
+    private String getTemplateByPageId(String pageId) {
         //取出页面的信息
         CmsPage cmsPage = this.getById(pageId);
-        if(cmsPage == null){
+        if (cmsPage == null) {
             //页面不存在
             ExceptionCast.cast(CmsCode.CMS_PAGE_NOTEXISTS);
         }
         //获取页面的模板id
         String templateId = cmsPage.getTemplateId();
-        if(StringUtils.isEmpty(templateId)){
+        if (StringUtils.isEmpty(templateId)) {
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);
         }
         //查询模板信息
         Optional<CmsTemplate> optional = cmsTemplateRepository.findById(templateId);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             CmsTemplate cmsTemplate = optional.get();
             //获取模板文件id
             String templateFileId = cmsTemplate.getTemplateFileId();
@@ -267,7 +271,7 @@ public class PageService {
             //打开一个下载流对象
             GridFSDownloadStream gridFSDownloadStream = gridFSBucket.openDownloadStream(gridFSFile.getObjectId());
             //创建GridFsResource对象，获取流
-            GridFsResource gridFsResource = new GridFsResource(gridFSFile,gridFSDownloadStream);
+            GridFsResource gridFsResource = new GridFsResource(gridFSFile, gridFSDownloadStream);
             //从流中取数据
             try {
                 String content = IOUtils.toString(gridFsResource.getInputStream(), "utf-8");
@@ -282,16 +286,16 @@ public class PageService {
     }
 
     //获取数据模型
-    private Map getModelByPageId(String pageId){
+    private Map getModelByPageId(String pageId) {
         //取出页面的信息
         CmsPage cmsPage = this.getById(pageId);
-        if(cmsPage == null){
+        if (cmsPage == null) {
             //页面不存在
             ExceptionCast.cast(CmsCode.CMS_PAGE_NOTEXISTS);
         }
         //取出页面的dataUrl
         String dataUrl = cmsPage.getDataUrl();
-        if(StringUtils.isEmpty(dataUrl)){
+        if (StringUtils.isEmpty(dataUrl)) {
             //页面dataUrl为空
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_DATAURLISNULL);
         }
@@ -304,6 +308,7 @@ public class PageService {
 
     /**
      * 根据id查询配置管理信息
+     *
      * @param id
      * @return
      */
@@ -315,5 +320,16 @@ public class PageService {
             return cmsConfig;
         }
         return null;
+    }
+
+    //保存页面，有则更新，没有则添加
+    public CmsPageResult save(CmsPage cmsPage) {
+        //判断页面是否存在
+        CmsPage one = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
+        if (one != null) {
+            //进行更新
+            return this.update(one.getPageId(), cmsPage);
+        }
+        return this.add(cmsPage);
     }
 }

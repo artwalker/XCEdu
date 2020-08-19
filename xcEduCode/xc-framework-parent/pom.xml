@@ -6,6 +6,7 @@
     <modules>
         <module>../test-rabbitmq-consumer</module>
         <module>../test-rabbitmq-producer</module>
+        <module>../xc-govern-center</module>
     </modules>
 
     <parent>

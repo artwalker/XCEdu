@@ -4,12 +4,11 @@ import org.csource.common.MyException;
 import org.csource.fastdfs.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * @author Administrator
@@ -57,7 +56,7 @@ public class TestFastDFS {
         TrackerServer trackerServer = tracker.getConnection();
         StorageServer storageServer = null;
 
-        StorageClient storageClient = new StorageClient(trackerServer,storageServer);
+        StorageClient storageClient = new StorageClient(trackerServer, storageServer);
         FileInfo fileInfo = storageClient.query_file_info("group1", "M00/00/00/CtM3DV82NfuAGyaGAAbISIubyYk709.png");
 
         System.out.println(fileInfo);

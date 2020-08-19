@@ -16,6 +16,10 @@ import io.swagger.annotations.ApiOperation;
  */
 @Api(value = "cms页面管理接口", description = "cms页面管理接口，提供页面的增、删、改、查")
 public interface CmsPageControllerApi {
+
+    @ApiOperation(" 保存页面")
+    public CmsPageResult save(CmsPage cmsPage);
+
     @ApiOperation("分页查询页面列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "页码", required = true, paramType = "path", dataType = "int"),
