@@ -7,6 +7,7 @@
         <module>../test-rabbitmq-consumer</module>
         <module>../test-rabbitmq-producer</module>
         <module>../xc-govern-center</module>
+        <module>../xc-service-search</module>
     </modules>
 
     <parent>

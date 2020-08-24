@@ -37,6 +37,5 @@ public class ConsumerPostPage {
         }
         //调用service方法将页面从GridFs中下载到服务器
         pageService.savePageToServerPath(pageId);
-
     }
 }

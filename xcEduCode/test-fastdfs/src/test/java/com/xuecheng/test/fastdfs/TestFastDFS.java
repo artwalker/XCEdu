@@ -21,7 +21,6 @@ public class TestFastDFS {
     //上传文件
     @Test
     public void testUpload() {
-
         try {
             //加载fastdfs-client.properties配置文件
             ClientGlobal.initByProperties("config/fastdfs-client.properties");
@@ -40,11 +39,9 @@ public class TestFastDFS {
             String fileId = storageClient1.upload_file1(filePath, "png", null);
             System.out.println(fileId);
             //group1/M00/00/00/CtM3DV82NfuAGyaGAAbISIubyYk709.png
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     //查询文件

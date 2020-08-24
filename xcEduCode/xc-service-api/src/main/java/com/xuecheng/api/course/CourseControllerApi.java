@@ -22,6 +22,9 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "课程管理接口", description = "课程管理接口，提供课程的增、删、改、查")
 public interface CourseControllerApi {
 
+    @ApiOperation("课程发布")
+    public CoursePublishResult publish(String id);
+
     @ApiOperation("预览课程")
     public CoursePublishResult preview(String id);
 
