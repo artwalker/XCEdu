@@ -3,6 +3,7 @@ package com.xuecheng.manage_course.service;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.util.StringUtil;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.domain.cms.response.CmsPostPageResult;
@@ -366,31 +367,65 @@ public class CourseService {
 
     //课程发布
     @Transactional
-    public CoursePublishResult publish(String courseId) {
-        //创建课程索引
-        //创建课程索引信息
-        CoursePub coursePub = createCoursePub(courseId);
-        //向数据库保存课程索引信息
-        CoursePub newCoursePub = saveCoursePub(courseId, coursePub);
-        if (newCoursePub == null) {
-            //创建课程索引信息失败
-            ExceptionCast.cast(CourseCode.COURSE_PUBLISH_CREATE_INDEX_ERROR);
+    public CoursePublishResult publish(String id) {
+//        //创建课程索引
+//        //创建课程索引信息
+//        CoursePub coursePub = createCoursePub(courseId);
+//        //向数据库保存课程索引信息
+//        CoursePub newCoursePub = saveCoursePub(courseId, coursePub);
+//        if (newCoursePub == null) {
+//            //创建课程索引信息失败
+//            ExceptionCast.cast(CourseCode.COURSE_PUBLISH_CREATE_INDEX_ERROR);
+//        }
+//
+//        //课程信息
+//        CourseBase one = this.findCourseBaseById(courseId);
+//        //发布课程详情页面
+//        CmsPostPageResult cmsPostPageResult = this.publishPage(courseId);
+//        if (!cmsPostPageResult.isSuccess()) {
+//            ExceptionCast.cast(CommonCode.FAIL);
+//        }
+//        //更新课程状态
+//        CourseBase courseBase = saveCoursePubState(courseId);
+//        //课程索引...
+//        //课程缓存...
+//        //页面url
+//        String pageUrl = cmsPostPageResult.getPageUrl();
+//        return new CoursePublishResult(CommonCode.SUCCESS, pageUrl);
+        //查询课程
+        CourseBase courseBaseById = this.findCourseBaseById(id);
+
+        //准备页面信息
+        CmsPage cmsPage = new CmsPage();
+        cmsPage.setSiteId(publish_siteId);//站点id
+        cmsPage.setDataUrl(publish_dataUrlPre+id);//数据模型url
+        cmsPage.setPageName(id+".html");//页面名称
+        cmsPage.setPageAliase(courseBaseById.getName());//页面别名，就是课程名称
+        cmsPage.setPagePhysicalPath(publish_page_physicalpath);//页面物理路径
+        cmsPage.setPageWebPath(publish_page_webpath);//页面webpath
+        cmsPage.setTemplateId(publish_templateId);//页面模板id
+        //调用cms一键发布接口将课程详情页面发布到服务器
+        CmsPostPageResult cmsPostPageResult = cmsPageClient.postPageQuick(cmsPage);
+        if(!cmsPostPageResult.isSuccess()){
+            return new CoursePublishResult(CommonCode.FAIL,null);
         }
 
-        //课程信息
-        CourseBase one = this.findCourseBaseById(courseId);
-        //发布课程详情页面
-        CmsPostPageResult cmsPostPageResult = publish_page(courseId);
-        if (!cmsPostPageResult.isSuccess()) {
-            ExceptionCast.cast(CommonCode.FAIL);
+        //保存课程的发布状态为“已发布”
+        CourseBase courseBase = this.saveCoursePubState(id);
+        if(courseBase == null){
+            return new CoursePublishResult(CommonCode.FAIL,null);
         }
-        //更新课程状态
-        CourseBase courseBase = saveCoursePubState(courseId);
-        //课程索引...
-        //课程缓存...
-        //页面url
+
+        //保存课程索引信息
+        //先创建一个coursePub对象
+        CoursePub coursePub = createCoursePub(id);
+        //将coursePub对象保存到数据库
+        saveCoursePub(id,coursePub);
+        //缓存课程的信息
+        //...
+        //得到页面的url
         String pageUrl = cmsPostPageResult.getPageUrl();
-        return new CoursePublishResult(CommonCode.SUCCESS, pageUrl);
+        return new CoursePublishResult(CommonCode.SUCCESS,pageUrl);
     }
 
     //更新课程发布状态
@@ -402,7 +437,7 @@ public class CourseService {
     }
 
     //发布课程正式页面
-    public CmsPostPageResult publish_page(String courseId) {
+    public CmsPostPageResult publishPage(String courseId) {
         CourseBase one = this.findCourseBaseById(courseId); //发布课程预览页面
         CmsPage cmsPage = new CmsPage();
         //站点
@@ -421,7 +456,7 @@ public class CourseService {
 
     //保存CoursePub
     public CoursePub saveCoursePub(String id, CoursePub coursePub) {
-        if (StringUtils.isNotEmpty(id)) {
+        if (!StringUtils.isNotEmpty(id)) {
             ExceptionCast.cast(CourseCode.COURSE_PUBLISH_COURSEIDISNULL);
         }
         CoursePub coursePubNew = null;
@@ -432,7 +467,7 @@ public class CourseService {
         if (coursePubNew == null) {
             coursePubNew = new CoursePub();
         }
-        BeanUtils.copyProperties(coursePub, coursePubNew);
+        BeanUtils.copyProperties(coursePubNew, coursePub);
         //设置主键
         coursePubNew.setId(id);
         //更新时间戳为最新时间

@@ -35,7 +35,7 @@ public class CoursePub implements Serializable {
     private String charge;
     private String valid;
     private String qq;
-    private Float price;
+    private Double price;
     private Float price_old;
     private String expires;
     private String teachplan;//课程计划

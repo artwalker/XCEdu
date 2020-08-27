@@ -9,14 +9,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,101 +28,154 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author HackerStar
- * @create 2020-08-25 11:47
- */
+ * @author Administrator
+ * @version 1.0
+ **/
 @Service
 public class EsCourseService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(EsCourseService.class);
 
-    @Value("${xuecheng.elasticsearch.course.index}")
-    private String es_index;
-    @Value("${xuecheng.elasticsearch.course.type}")
-    private String es_type;
-    @Value("${xuecheng.elasticsearch.course.source_field}")
+    @Value("${xuecheng.course.index}")
+    private String index;
+    @Value("${xuecheng.course.type}")
+    private String type;
+    @Value("${xuecheng.course.source_field}")
     private String source_field;
 
     @Autowired
     RestHighLevelClient restHighLevelClient;
 
+    //课程搜索
     public QueryResponseResult<CoursePub> list(int page, int size, CourseSearchParam courseSearchParam) {
-        //设置索引
-        SearchRequest searchRequest = new SearchRequest(es_index);
-        //设置类型
-        searchRequest.types(es_type);
+        if(courseSearchParam == null){
+            courseSearchParam = new CourseSearchParam();
+        }
+        //创建搜索请求对象
+        SearchRequest searchRequest = new SearchRequest(index);
+        //设置搜索类型
+        searchRequest.types(type);
+
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        //过虑源字段
+        String[] source_field_array = source_field.split(",");
+        searchSourceBuilder.fetchSource(source_field_array,new String[]{});
+        //创建布尔查询对象
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        //source源字段过滤
-        String[] source_fields = source_field.split(",");
-        searchSourceBuilder.fetchSource(source_fields, new String[]{});
-        //关键字
-        if (StringUtils.isNotEmpty(courseSearchParam.getKeyword())) {
-            //匹配关键字
-            MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(courseSearchParam.getKeyword(), "name", "teachplan", "description");
-            //设置匹配占比
-            multiMatchQueryBuilder.minimumShouldMatch("70%");
-            //提升另个字段的Boost值
-            multiMatchQueryBuilder.field("name", 10);
+        //搜索条件
+        //根据关键字搜索
+        if(StringUtils.isNotEmpty(courseSearchParam.getKeyword())){
+            MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(courseSearchParam.getKeyword(), "name", "description", "teachplan")
+                    .minimumShouldMatch("70%")
+                    .field("name", 10);
             boolQueryBuilder.must(multiMatchQueryBuilder);
         }
-        //布尔查询
+        if(StringUtils.isNotEmpty(courseSearchParam.getMt())){
+            //根据一级分类
+            boolQueryBuilder.filter(QueryBuilders.termQuery("mt",courseSearchParam.getMt()));
+        }
+        if(StringUtils.isNotEmpty(courseSearchParam.getSt())){
+            //根据二级分类
+            boolQueryBuilder.filter(QueryBuilders.termQuery("st",courseSearchParam.getSt()));
+        }
+        if(StringUtils.isNotEmpty(courseSearchParam.getGrade())){
+            //根据难度等级
+            boolQueryBuilder.filter(QueryBuilders.termQuery("grade",courseSearchParam.getGrade()));
+        }
+
+        //设置boolQueryBuilder到searchSourceBuilder
         searchSourceBuilder.query(boolQueryBuilder);
-        //请求搜索
+        //设置分页参数
+        if(page<=0){
+            page = 1;
+        }
+        if(size<=0){
+            size = 12;
+        }
+        //起始记录下标
+        int from  = (page-1)*size;
+        searchSourceBuilder.from(from);
+        searchSourceBuilder.size(size);
+
+        //设置高亮
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.preTags("<font class='eslight'>");
+        highlightBuilder.postTags("</font>");
+        //设置高亮字段
+        highlightBuilder.fields().add(new HighlightBuilder.Field("name"));
+        searchSourceBuilder.highlighter(highlightBuilder);
+
         searchRequest.source(searchSourceBuilder);
-        SearchResponse searchResponse = null;
+
+        QueryResult<CoursePub> queryResult = new QueryResult();
+        List<CoursePub> list = new ArrayList<>();
         try {
-            searchResponse = restHighLevelClient.search(searchRequest);
+            //执行搜索
+            SearchResponse searchResponse = restHighLevelClient.search(searchRequest);
+            //获取响应结果
+            SearchHits hits = searchResponse.getHits();
+            //匹配的总记录数
+            long totalHits = hits.totalHits;
+            queryResult.setTotal(totalHits);
+            SearchHit[] searchHits = hits.getHits();
+            for(SearchHit hit:searchHits){
+                CoursePub coursePub = new CoursePub();
+                //源文档
+                Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+                //取出id
+                String id = (String)sourceAsMap.get("id");
+                coursePub.setId(id);
+                //取出name
+                String name = (String) sourceAsMap.get("name");
+                //取出高亮字段name
+                Map<String, HighlightField> highlightFields = hit.getHighlightFields();
+                if(highlightFields!=null){
+                    HighlightField highlightFieldName = highlightFields.get("name");
+                    if(highlightFieldName!=null){
+                        Text[] fragments = highlightFieldName.fragments();
+                        StringBuffer stringBuffer = new StringBuffer();
+                        for(Text text:fragments){
+                            stringBuffer.append(text);
+                        }
+                        name = stringBuffer.toString();
+                    }
+
+                }
+                coursePub.setName(name);
+                //图片
+                String pic = (String) sourceAsMap.get("pic");
+                coursePub.setPic(pic);
+                //价格
+                Double price = null;
+                try {
+                    if(sourceAsMap.get("price")!=null ){
+                        price = (Double) sourceAsMap.get("price");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                coursePub.setPrice(price);
+                //旧价格
+                Float price_old = null;
+                try {
+                    if(sourceAsMap.get("price_old")!=null ){
+                        price_old = (Float) sourceAsMap.get("price_old");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                coursePub.setPrice_old(price_old);
+                //将coursePub对象放入list
+                list.add(coursePub);
+            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
-            LOGGER.error("xuecheng search error..{}", e.getMessage());
-            return new QueryResponseResult(CommonCode.SUCCESS, new QueryResult<CoursePub>());
         }
 
-        //结果集处理
-        SearchHits hits = searchResponse.getHits();
-        SearchHit[] searchHits = hits.getHits();
-        //记录总数
-        long totalHits = hits.getTotalHits();
-        //数据列表
-        List<CoursePub> list = new ArrayList<>();
-        for (SearchHit hit : searchHits) {
-            CoursePub coursePub = new CoursePub();
-            //取出source
-            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
-            //取出名称
-            String name = (String) sourceAsMap.get("name");
-            coursePub.setName(name);
-            //图片
-            String pic = (String) sourceAsMap.get("pic");
-            coursePub.setPic(pic);
-            //价格
-            Float price = null;
-            try {
-                if (sourceAsMap.get("price") != null) {
-                    price = Float.parseFloat((String) sourceAsMap.get("price"));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            coursePub.setPrice(price);
-            Float price_old = null;
-            try {
-                if (sourceAsMap.get("price_old") != null) {
-
-                    price_old = Float.parseFloat((String) sourceAsMap.get("price_old"));
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            coursePub.setPrice_old(price_old);
-            list.add(coursePub);
-        }
-
-        QueryResult<CoursePub> queryResult = new QueryResult<>();
         queryResult.setList(list);
-        queryResult.setTotal(totalHits);
-        QueryResponseResult<CoursePub> coursePubQueryResponseResult = new QueryResponseResult<CoursePub>(CommonCode.SUCCESS, queryResult);
-        return coursePubQueryResponseResult;
+        QueryResponseResult<CoursePub> queryResponseResult = new QueryResponseResult<CoursePub>(CommonCode.SUCCESS,queryResult);
+
+        return queryResponseResult;
     }
 }
