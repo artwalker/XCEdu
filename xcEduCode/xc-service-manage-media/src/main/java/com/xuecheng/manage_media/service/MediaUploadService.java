@@ -1,11 +1,13 @@
 package com.xuecheng.manage_media.service;
 
+import com.alibaba.fastjson.JSON;
 import com.xuecheng.framework.domain.media.MediaFile;
 import com.xuecheng.framework.domain.media.response.CheckChunkResult;
 import com.xuecheng.framework.domain.media.response.MediaCode;
 import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.ResponseResult;
+import com.xuecheng.manage_media.config.RabbitMQConfig;
 import com.xuecheng.manage_media.controller.MediaUploadController;
 import com.xuecheng.manage_media.dao.MediaFileRepository;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -13,6 +15,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,9 +35,15 @@ public class MediaUploadService {
     @Autowired
     MediaFileRepository mediaFileRepository;
 
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+
     //上传文件根目录
     @Value("${xc-service-manage-media.upload-location}")
     String uploadPath;
+
+    @Value("${xc-service-manage-media.mq.routingkey‐media‐video}")
+    String routingkey_media_video;
 
     /**
      * 根据文件md5得到文件路径
@@ -60,7 +69,7 @@ public class MediaUploadService {
 
     //得到文件所在目录
     private String getFileFolderPath(String fileMd5) {
-        String fileFolderPath = uploadPath + "/"  + fileMd5.substring(0, 1) + "/" + fileMd5.substring(1, 2) + "/" + fileMd5 + "/";
+        String fileFolderPath = uploadPath + "/" + fileMd5.substring(0, 1) + "/" + fileMd5.substring(1, 2) + "/" + fileMd5 + "/";
         return fileFolderPath;
     }
 
@@ -216,6 +225,10 @@ public class MediaUploadService {
         //状态为上传成功
         mediaFile.setFileStatus("301002");
         MediaFile save = mediaFileRepository.save(mediaFile);
+
+        //向MQ发送视频处理消息
+        this.sendProcessVideoMsg(fileMd5);
+
         return new ResponseResult(CommonCode.SUCCESS);
     }
 
@@ -293,5 +306,28 @@ public class MediaUploadService {
             return null;
         }
         return mergeFile;
+    }
+
+    //向MQ发送视频处理消息
+    public ResponseResult sendProcessVideoMsg(String mediaId) {
+        Optional<MediaFile> optional = mediaFileRepository.findById(mediaId);
+
+        if (!optional.isPresent()) {
+            return new ResponseResult(CommonCode.FAIL);
+        }
+        MediaFile mediaFile = optional.get();
+        Map<String, String> msgMap = new HashMap<>();
+        msgMap.put("mediaId", mediaId);
+        //发送的消息
+        String msg = JSON.toJSONString(msgMap);
+        try {
+            this.rabbitTemplate.convertAndSend(RabbitMQConfig.EX_MEDIA_PROCESSTASK, routingkey_media_video, msg);
+            LOGGER.info("send media process task msg:{}", msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.info("send media process task error,msg is:{},error:{}", msg, e.getMessage());
+            return new ResponseResult(CommonCode.FAIL);
+        }
+        return new ResponseResult(CommonCode.SUCCESS);
     }
 }

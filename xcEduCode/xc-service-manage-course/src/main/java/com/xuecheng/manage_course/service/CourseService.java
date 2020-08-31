@@ -64,6 +64,9 @@ public class CourseService {
     @Autowired
     CoursePubRepository coursePubRepository;
 
+    @Autowired
+    TeachplanMediaRepository teachplanMediaRepository;
+
     @Value("${course-publish.dataUrlPre}")
     private String publish_dataUrlPre;
     @Value("${course-publish.pagePhysicalPath}")
@@ -397,34 +400,34 @@ public class CourseService {
         //准备页面信息
         CmsPage cmsPage = new CmsPage();
         cmsPage.setSiteId(publish_siteId);//站点id
-        cmsPage.setDataUrl(publish_dataUrlPre+id);//数据模型url
-        cmsPage.setPageName(id+".html");//页面名称
+        cmsPage.setDataUrl(publish_dataUrlPre + id);//数据模型url
+        cmsPage.setPageName(id + ".html");//页面名称
         cmsPage.setPageAliase(courseBaseById.getName());//页面别名，就是课程名称
         cmsPage.setPagePhysicalPath(publish_page_physicalpath);//页面物理路径
         cmsPage.setPageWebPath(publish_page_webpath);//页面webpath
         cmsPage.setTemplateId(publish_templateId);//页面模板id
         //调用cms一键发布接口将课程详情页面发布到服务器
         CmsPostPageResult cmsPostPageResult = cmsPageClient.postPageQuick(cmsPage);
-        if(!cmsPostPageResult.isSuccess()){
-            return new CoursePublishResult(CommonCode.FAIL,null);
+        if (!cmsPostPageResult.isSuccess()) {
+            return new CoursePublishResult(CommonCode.FAIL, null);
         }
 
         //保存课程的发布状态为“已发布”
         CourseBase courseBase = this.saveCoursePubState(id);
-        if(courseBase == null){
-            return new CoursePublishResult(CommonCode.FAIL,null);
+        if (courseBase == null) {
+            return new CoursePublishResult(CommonCode.FAIL, null);
         }
 
         //保存课程索引信息
         //先创建一个coursePub对象
         CoursePub coursePub = createCoursePub(id);
         //将coursePub对象保存到数据库
-        saveCoursePub(id,coursePub);
+        saveCoursePub(id, coursePub);
         //缓存课程的信息
         //...
         //得到页面的url
         String pageUrl = cmsPostPageResult.getPageUrl();
-        return new CoursePublishResult(CommonCode.SUCCESS,pageUrl);
+        return new CoursePublishResult(CommonCode.SUCCESS, pageUrl);
     }
 
     //更新课程发布状态
@@ -508,5 +511,39 @@ public class CourseService {
         String teachplanString = JSON.toJSONString(teachplanNode);
         coursePub.setTeachplan(teachplanString);
         return coursePub;
+    }
+
+    //保存媒资信息
+    public ResponseResult savemedia(TeachplanMedia teachplanMedia) {
+        if (teachplanMedia == null) {
+            ExceptionCast.cast(CommonCode.INVALIDPARAM);
+        }
+        //课程计划
+        String teachplanId = teachplanMedia.getTeachplanId();
+        //查询课程计划
+        Optional<Teachplan> optional = teachplanRepository.findById(teachplanId);
+
+        if (!optional.isPresent()) {
+            ExceptionCast.cast(CourseCode.COURSE_MEDIA_TEACHPLAN_ISNULL);
+        }
+        Teachplan teachplan = optional.get(); //只允许为叶子结点课程计划选择视频
+        String grade = teachplan.getGrade();
+        if (StringUtils.isEmpty(grade) || !grade.equals("3")) {
+            ExceptionCast.cast(CourseCode.COURSE_MEDIA_TEACHPLAN_GRADEERROR);
+        }
+        TeachplanMedia one = null;
+        Optional<TeachplanMedia> teachplanMediaOptional =  teachplanMediaRepository.findById(teachplanId);
+        if (!teachplanMediaOptional.isPresent()) {
+            one = new TeachplanMedia();
+        } else {
+            one = teachplanMediaOptional.get();
+        } //保存媒资信息与课程计划信息
+        one.setTeachplanId(teachplanId);
+        one.setCourseId(teachplanMedia.getCourseId());
+        one.setMediaFileOriginalName(teachplanMedia.getMediaFileOriginalName());
+        one.setMediaId(teachplanMedia.getMediaId());
+        one.setMediaUrl(teachplanMedia.getMediaUrl());
+        teachplanMediaRepository.save(one);
+        return new ResponseResult(CommonCode.SUCCESS);
     }
 }
