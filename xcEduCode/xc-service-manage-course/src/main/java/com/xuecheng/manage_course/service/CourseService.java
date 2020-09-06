@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -66,6 +67,9 @@ public class CourseService {
 
     @Autowired
     TeachplanMediaRepository teachplanMediaRepository;
+
+    @Autowired
+    TeachplanMediaPubRepository teachplanMediaPubRepository;
 
     @Value("${course-publish.dataUrlPre}")
     private String publish_dataUrlPre;
@@ -427,6 +431,7 @@ public class CourseService {
         //...
         //得到页面的url
         String pageUrl = cmsPostPageResult.getPageUrl();
+        saveTeachplanMediaPub(id);
         return new CoursePublishResult(CommonCode.SUCCESS, pageUrl);
     }
 
@@ -532,7 +537,7 @@ public class CourseService {
             ExceptionCast.cast(CourseCode.COURSE_MEDIA_TEACHPLAN_GRADEERROR);
         }
         TeachplanMedia one = null;
-        Optional<TeachplanMedia> teachplanMediaOptional =  teachplanMediaRepository.findById(teachplanId);
+        Optional<TeachplanMedia> teachplanMediaOptional = teachplanMediaRepository.findById(teachplanId);
         if (!teachplanMediaOptional.isPresent()) {
             one = new TeachplanMedia();
         } else {
@@ -545,5 +550,19 @@ public class CourseService {
         one.setMediaUrl(teachplanMedia.getMediaUrl());
         teachplanMediaRepository.save(one);
         return new ResponseResult(CommonCode.SUCCESS);
+    }
+
+    //保存课程计划媒资信息
+    private void saveTeachplanMediaPub(String courseId) {
+        //查询课程媒资信息
+        List<TeachplanMedia> teachplanMediaList = teachplanMediaRepository.findByCourseId(courseId); //将课程计划媒资信息存储待索引表
+        teachplanMediaPubRepository.deleteByCourseId(courseId);
+        List<TeachplanMediaPub> teachplanMediaPubList = new ArrayList<>();
+        for (TeachplanMedia teachplanMedia : teachplanMediaList) {
+            TeachplanMediaPub teachplanMediaPub = new TeachplanMediaPub();
+            BeanUtils.copyProperties(teachplanMedia, teachplanMediaPub);
+            teachplanMediaPubList.add(teachplanMediaPub);
+        }
+        teachplanMediaPubRepository.saveAll(teachplanMediaPubList);
     }
 }

@@ -1,8 +1,0 @@
-2020-08-24 17:33:48.354 [Thread-32] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6622a690: startup date [Wed Aug 19 16:35:41 CST 2020]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@3b00856b
-2020-08-24 17:33:48.457 [Thread-32] INFO  o.s.c.s.DefaultLifecycleProcessor - Stopping beans in phase 2147483647
-2020-08-24 17:33:48.525 [Thread-32] INFO  o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish.
-2020-08-24 17:33:48.722 [Thread-32] INFO  o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish.
-2020-08-24 17:33:48.722 [Thread-32] INFO  o.s.c.s.DefaultLifecycleProcessor - Stopping beans in phase 0
-2020-08-24 17:33:48.758 [Thread-32] INFO  o.s.a.r.l.SimpleMessageListenerContainer - Shutdown ignored - container is not active already
-2020-08-24 17:33:48.773 [Thread-32] INFO  o.s.j.e.a.AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
-2020-08-24 17:33:48.774 [Thread-32] INFO  o.s.j.e.a.AnnotationMBeanExporter - Unregistering JMX-exposed beans

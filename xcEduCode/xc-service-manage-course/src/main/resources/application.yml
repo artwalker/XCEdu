@@ -42,3 +42,9 @@ course-publish:
   pageWebPath: /course/detail/
   pagePhysicalPath: /course/detail/
   dataUrlPre: http://localhost:31200/course/courseview/
+xuecheng:
+  elasticsearch:
+    media:
+      index: xc_course_media
+      type: doc
+      source_field: courseid,media_id,media_url,teachplan_id,media_fileoriginalname
