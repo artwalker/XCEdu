@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework.boot:spring-boot-starter-com.xuecheng.test:unknown">
+    <CLASSES>
+      <root url="jar:///usr/local/apache-maven-3.5.4/repository3/org/springframework/boot/spring-boot-starter-com.xuecheng.test/unknown/spring-boot-starter-com.xuecheng.test-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar:///usr/local/apache-maven-3.5.4/repository3/org/springframework/boot/spring-boot-starter-com.xuecheng.test/unknown/spring-boot-starter-com.xuecheng.test-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar:///usr/local/apache-maven-3.5.4/repository3/org/springframework/boot/spring-boot-starter-com.xuecheng.test/unknown/spring-boot-starter-com.xuecheng.test-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

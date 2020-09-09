@@ -1,4 +1,4 @@
-package com.xuecheng.test.rabbitmq.config;
+package com.xuecheng.auth.rabbitmq.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;

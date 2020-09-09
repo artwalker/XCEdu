@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>../test-rabbitmq-consumer</module>
-        <module>../test-rabbitmq-producer</module>
+        <module>../com.xuecheng.test-rabbitmq-consumer</module>
+        <module>../com.xuecheng.test-rabbitmq-producer</module>
         <module>../xc-govern-center</module>
         <module>../xc-service-search</module>
     </modules>
@@ -46,7 +46,7 @@
         <elasticsearch.version>6.2.1</elasticsearch.version>
         <guava.version>24.0-jre</guava.version>
     </properties>
-    <!--test-->
+    <!--com.xuecheng.auth-->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -136,7 +136,6 @@
                 <artifactId>fastdfs-client-java</artifactId>
                 <version>${fastdfs-client-java.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>
                 <artifactId>elasticsearch-rest-high-level-client</artifactId>

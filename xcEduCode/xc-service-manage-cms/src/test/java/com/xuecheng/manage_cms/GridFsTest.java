@@ -38,7 +38,7 @@ public class GridFsTest {
     // 文件存储2
     @Test
     public void testStore2() throws FileNotFoundException {
-        File file = new File("/Users/XinxingWang/Development/Java/IDEA_Project/xcEduCode/test-freemarker/src/main/resources/templates/course.ftl");
+        File file = new File("/Users/XinxingWang/Development/Java/IDEA_Project/xcEduCode/com.xuecheng.test-freemarker/src/main/resources/templates/course.ftl");
         FileInputStream inputStream = new FileInputStream(file); //保存模版文件内容
         ObjectId gridFSFile = gridFsTemplate.store(inputStream, "course.ftl");
         System.out.println(gridFSFile);
@@ -48,7 +48,7 @@ public class GridFsTest {
     @Test
     public void testStore() throws FileNotFoundException {
         //定义file
-        File file = new File("/Users/XinxingWang/Development/Java/IDEA_Project/xcEduCode/test-freemarker/src/main/resources/templates/index_banner.html");
+        File file = new File("/Users/XinxingWang/Development/Java/IDEA_Project/xcEduCode/com.xuecheng.test-freemarker/src/main/resources/templates/index_banner.html");
         //定义fileInputStream
         FileInputStream fileInputStream = new FileInputStream(file);
         ObjectId objectId = gridFsTemplate.store(fileInputStream, "index_banner.ftl");

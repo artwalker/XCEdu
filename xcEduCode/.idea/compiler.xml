@@ -7,23 +7,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="xc-service-manage-course" />
         <module name="xc-framework-model" />
-        <module name="xc-framework-utils" />
-        <module name="xc-service-api" />
-        <module name="test-rabbitmq-consumer" />
-        <module name="xc-service-base-filesystem" />
-        <module name="test-rabbitmq-producer" />
-        <module name="xc-framework-common" />
-        <module name="xc-service-learning" />
-        <module name="xc-govern-center" />
         <module name="test-fastdfs" />
+        <module name="xc-framework-utils" />
+        <module name="xc-framework-common" />
+        <module name="xc-service-manage-course" />
+        <module name="xc-service-learning" />
+        <module name="xc-service-search" />
+        <module name="test-freemarker" />
+        <module name="xc-govern-center" />
+        <module name="xc-service-ucenter-auth" />
+        <module name="xc-service-base-filesystem" />
+        <module name="xc-service-manage-cms-client" />
+        <module name="xc-service-api" />
         <module name="xc-service-manage-media" />
         <module name="xc-service-manage-cms" />
-        <module name="xc-service-search" />
-        <module name="xc-service-manage-cms-client" />
         <module name="xc-service-manage-media-processor" />
-        <module name="test-freemarker" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -46,6 +45,7 @@
       <module name="xc-service-manage-media" target="1.8" />
       <module name="xc-service-manage-media-processor" target="1.8" />
       <module name="xc-service-search" target="1.8" />
+      <module name="xc-service-ucenter-auth" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -67,6 +67,7 @@
       <module name="xc-service-manage-media" options="-parameters" />
       <module name="xc-service-manage-media-processor" options="-parameters" />
       <module name="xc-service-search" options="-parameters" />
+      <module name="xc-service-ucenter-auth" options="-parameters" />
     </option>
   </component>
 </project>

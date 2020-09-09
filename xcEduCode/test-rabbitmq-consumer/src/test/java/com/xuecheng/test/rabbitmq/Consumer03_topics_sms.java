@@ -1,4 +1,4 @@
-package com.xuecheng.test.rabbitmq;
+package com.xuecheng.auth.rabbitmq;
 
 import com.rabbitmq.client.*;
 

@@ -1,7 +1,7 @@
-package com.xuecheng.test.rabbitmq;
+package com.xuecheng.auth.rabbitmq;
 
 import com.alibaba.fastjson.JSON;
-import com.xuecheng.test.rabbitmq.config.RabbitmqConfig;
+import com.xuecheng.auth.rabbitmq.config.RabbitmqConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

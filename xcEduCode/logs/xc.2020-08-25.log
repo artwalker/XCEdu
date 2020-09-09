@@ -842,7 +842,7 @@ Negative matches:
 
    MailSenderValidatorAutoConfiguration:
       Did not match:
-         - @ConditionalOnProperty (spring.mail.test-connection) did not find property 'test-connection' (OnPropertyCondition)
+         - @ConditionalOnProperty (spring.mail.com.xuecheng.auth-connection) did not find property 'com.xuecheng.auth-connection' (OnPropertyCondition)
 
    MessageSourceAutoConfiguration:
       Did not match:

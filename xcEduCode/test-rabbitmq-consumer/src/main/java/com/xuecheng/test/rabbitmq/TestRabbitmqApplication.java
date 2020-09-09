@@ -1,4 +1,4 @@
-package com.xuecheng.test.rabbitmq;
+package com.xuecheng.auth.rabbitmq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

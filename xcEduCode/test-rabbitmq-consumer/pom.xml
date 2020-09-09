@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>test-rabbitmq-consumer</artifactId>
+    <artifactId>com.xuecheng.test-rabbitmq-consumer</artifactId>
 
     <dependencies>
         <!--        <dependency>-->
@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-com.xuecheng.test</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
