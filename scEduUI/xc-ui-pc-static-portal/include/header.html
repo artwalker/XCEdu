@@ -20,9 +20,8 @@
     <script src="/js/util.js"></script>
     <script src="/js/public.js"></script>
     <script src="/js/login.js"></script>
-
-
 </head>
+<script src="/css/el/index.js"></script>
 <body >
 <div id="app">
 <!--头部导航-->
@@ -139,6 +138,26 @@
             },
             showlogin: function(){
                 window.location = "http://ucenter.xuecheng.com/#/login?returnUrl="+ Base64.encode(window.location)
+            },
+            //解析jwt令牌，获取用户信息
+            getUserInfoFromJwt : function (jwt) {
+                if(!jwt){
+                    return ;
+                }
+                var jwtDecodeVal = jwtDecode(jwt);
+                if (!jwtDecodeVal) {
+                    return ;
+                }
+                let activeUser={}
+                //console.log(jwtDecodeVal)
+                activeUser.utype = jwtDecodeVal.utype || '';
+                activeUser.username = jwtDecodeVal.name || '';
+                activeUser.userpic = jwtDecodeVal.userpic || '';
+                activeUser.userid = jwtDecodeVal.userid || '';
+                activeUser.authorities = jwtDecodeVal.authorities || '';
+                activeUser.uid = jwtDecodeVal.jti || '';
+                activeUser.jwt = jwt;
+                return activeUser;
             }
         },
        created() {
@@ -150,5 +169,6 @@
         }
     })
 </script>
+
 </body>
 </html>
