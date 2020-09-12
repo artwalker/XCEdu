@@ -60,7 +60,7 @@ import * as systemApi from './base/api/system';
 let sysConfig = require('@/../config/sysConfig')
 let openAuthenticate = sysConfig.openAuthenticate
 let openAuthorize = sysConfig.openAuthorize
-/*
+
 router.beforeEach((to, from, next) => {
   if(openAuthenticate){
 
@@ -106,7 +106,6 @@ router.beforeEach((to, from, next) => {
   }
 
 });
-*/
 //授权
 // router.afterEach((to, from, next) => {
 //   if(openAuthorize){

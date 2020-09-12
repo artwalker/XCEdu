@@ -83,11 +83,12 @@ export default{
     },
     getCourseView(){
       courseApi.findCourseView(this.courseid).then(res=>{
+        console(res)
         if(res && res.courseBase){
             //获取课程状态
             this.course.status = res.courseBase.status;
+            alert(res.courseBase.status);
         }
-
       })
     }
 

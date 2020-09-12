@@ -129,8 +129,9 @@ axios.interceptors.request.use(function (config) {
 }, function (error) {
   return Promise.reject(error);
 });
+
 // 响应拦截
-/*axios.interceptors.response.use(data => {
+axios.interceptors.response.use(data => {
   console.log("data=")
   console.log(data)
   if(data && data.data){
@@ -148,7 +149,7 @@ axios.interceptors.request.use(function (config) {
     }
   }
   return data
-})*/
+})
 /*
  //axios请求超时设置
 axios.defaults.retry = 2;
