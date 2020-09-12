@@ -188,10 +188,16 @@ public class CourseService {
     }
 
     //课程列表分页查询
-    public QueryResponseResult findCourseList(int page, int size, CourseListRequest courseListRequest) {
+    public QueryResponseResult findCourseList(String companyId, int page, int size, CourseListRequest courseListRequest) {
         if (courseListRequest == null) {
             courseListRequest = new CourseListRequest();
         }
+
+        //企业id
+        courseListRequest.setCompanyId(companyId);
+        //将companyId传给dao
+        courseListRequest.setCompanyId(companyId);
+
         if (page <= 0) {
             page = 0;
         }

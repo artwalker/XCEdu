@@ -14,6 +14,7 @@ import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_course.service.CategoryService;
 import com.xuecheng.manage_course.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -41,6 +42,7 @@ public class CourseController implements CourseControllerApi {
         return courseService.addCourseBase(courseBase);
     }
 
+    @PreAuthorize("hasAuthority('xc_teachmanager_course_plan')")
     @Override
     @GetMapping("/teachplan/list/{courseId}")
     public TeachplanNode findTeachplanList(@PathVariable("courseId") String courseId) {
@@ -54,10 +56,15 @@ public class CourseController implements CourseControllerApi {
         return courseService.addTeachplan(teachplan);
     }
 
+    @PreAuthorize("hasAuthority('course_find_list')")
     @Override
     @GetMapping("/coursebase/list/{page}/{size}")
     public QueryResponseResult findCourseList(@PathVariable("page") int page, @PathVariable("size") int size, CourseListRequest courseListRequest) {
-        return courseService.findCourseList(page, size, courseListRequest);
+
+        //先使用静态数据测试
+        String companyId = "1";
+
+        return courseService.findCourseList(companyId, page, size, courseListRequest);
     }
 
     @Override
@@ -72,6 +79,7 @@ public class CourseController implements CourseControllerApi {
         return courseService.savemedia(teachplanMedia);
     }
 
+    @PreAuthorize("hasAuthority('course_get_baseinfo')")
     @Override
     @GetMapping("/coursebase/get/{courseId}")
     public CourseBase getCourseBaseById(@PathVariable("courseId") String courseId) throws RuntimeException {

@@ -19,4 +19,7 @@ public class TeachplanNode extends Teachplan {
     private String mediaId;
     private String mediaFileOriginalName;
 
+    public List<TeachplanNode> getChildren() {
+        return children;
+    }
 }
