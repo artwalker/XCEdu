@@ -1,4 +1,4 @@
-package com.xuecheng.learning;
+package com.xuecheng.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,22 +12,18 @@ import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * @author Administrator
- * @version 1.0
- * @create 2018-07-14 11:11
- **/
-@EnableFeignClients
-@EnableDiscoveryClient
-@SpringBootApplication
-@EntityScan(value = {"com.xuecheng.framework.domain.learning","com.xuecheng.framework.domain.task"})//扫描实体类
-@ComponentScan(basePackages={"com.xuecheng.api"})//扫描接口
-@ComponentScan(basePackages={"com.xuecheng.learning"})//扫描接口
-@ComponentScan(basePackages={"com.xuecheng.framework"})//扫描common下的所有类
-public class LearningApplication {
 
+@EnableScheduling
+@EnableDiscoveryClient
+@EnableFeignClients
+@EntityScan(value={"com.xuecheng.framework.domain.order","com.xuecheng.framework.domain.task"})//扫描实体类
+@ComponentScan(basePackages={"com.xuecheng.api"})//扫描接口
+@ComponentScan(basePackages={"com.xuecheng.framework"})//扫描framework中通用类
+@ComponentScan(basePackages={"com.xuecheng.order"})//扫描本项目下的所有类
+@SpringBootApplication
+public class ManageOrderApplication {
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(LearningApplication.class, args);
+        SpringApplication.run(ManageOrderApplication.class, args);
     }
 
     @Bean
@@ -35,5 +31,4 @@ public class LearningApplication {
     public RestTemplate restTemplate() {
         return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
     }
-
 }

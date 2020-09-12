@@ -18,6 +18,9 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     public static final String EX_MEDIA_PROCESSTASK = "ex_media_processor";
+    public static final String XC_LEARNING_ADDCHOOSECOURSE = "xc_learning_addchoosecourse";
+    public static final String XC_LEARNING_FINISHADDCHOOSECOURSE_KEY = "xc_learning_finishaddchoosecourse_key";
+    public static final String EX_LEARNING_ADDCHOOSECOURSE = "EX_LEARNING_ADDCHOOSECOURSE";
     //消费者并发数量
     public static final int DEFAULT_CONCURRENT = 10;
 
